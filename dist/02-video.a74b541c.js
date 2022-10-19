@@ -504,18 +504,25 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"fFZ34":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+var _lodashThrottle = require("lodash.throttle");
+var _lodashThrottleDefault = parcelHelpers.interopDefault(_lodashThrottle);
 var _player = require("@vimeo/player");
 var _playerDefault = parcelHelpers.interopDefault(_player);
-var throttle = require("lodash.throttle");
 const iframe = document.querySelector("iframe");
 const player = new (0, _playerDefault.default)("vimeo-player");
+const LOCALSTORAGE_KEY = "videoplayer-current-time";
 // ====== Save time =====
-player.on("play", (data)=>{
-    let currentTime = localStorage.setItem("videoplayer-current-time", `${data.seconds}`);
-});
-player.getVideoTitle().then(function(title) {
-// console.log('title:', title);
-});
+// player.on('play', data => {
+//     let currentTime = localStorage.setItem(LOCALSTORAGE_KEY,`${data.seconds}`);
+// });
+// const onPlay = function (data) {
+//     const currentTime = localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+//   };
+onPlay = (data)=>localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+player.on("timeupdate", (0, _lodashThrottleDefault.default)(onPlay, 1000));
+// player.getVideoTitle().then(function(title) {
+//     // console.log('title:', title);
+// });
 //============= PLAY  =======
 // player
 //   .setCurrentTime(JSON.parse(localStorage.getItem('videoplayer-current-time')))
@@ -529,7 +536,7 @@ player.getVideoTitle().then(function(title) {
 //     }
 //   });
 // ===   Якщо коротко ===
-player.setCurrentTime(localStorage.getItem("videoplayer-current-time") || 0);
+player.setCurrentTime(localStorage.getItem(LOCALSTORAGE_KEY) || 0);
 
 },{"@vimeo/player":"kmmUG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","lodash.throttle":"bGJVT"}],"kmmUG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

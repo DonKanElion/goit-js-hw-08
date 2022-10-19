@@ -1,20 +1,31 @@
-
+import throttle from 'lodash.throttle';
 import Player from '@vimeo/player';
 
-var throttle = require('lodash.throttle');
+
 const iframe = document.querySelector('iframe');
 const player = new Player('vimeo-player');
+const LOCALSTORAGE_KEY = 'videoplayer-current-time';
 
 // ====== Save time =====
 
+// player.on('play', data => {
+//     let currentTime = localStorage.setItem(LOCALSTORAGE_KEY,`${data.seconds}`);
+// });
 
-player.on('play', data => {
-    let currentTime = localStorage.setItem("videoplayer-current-time",`${data.seconds}`);
-},);
+// const onPlay = function (data) {
+//     const currentTime = localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+//   };
 
-player.getVideoTitle().then(function(title) {
-    // console.log('title:', title);
-});
+
+onPlay = data => localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+
+player.on('timeupdate', throttle(onPlay, 1000));
+
+
+
+// player.getVideoTitle().then(function(title) {
+//     // console.log('title:', title);
+// });
 
 //============= PLAY  =======
 
@@ -32,5 +43,5 @@ player.getVideoTitle().then(function(title) {
 
   // ===   Якщо коротко ===
 
-  player.setCurrentTime(localStorage.getItem('videoplayer-current-time') || 0 );
+  player.setCurrentTime(localStorage.getItem(LOCALSTORAGE_KEY) || 0 );
 
