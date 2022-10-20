@@ -5,28 +5,26 @@ import { galleryItems } from './gallery-items';
 
 console.log(galleryItems);
 
-const galleryId = document.querySelector("gallery");
+const galleryId = document.querySelector(".gallery");
 
-const createImgEl = 
-// galleryItems.reduce(
-//     (acc, item) =>
-//       acc +
-//       `<a class="gallery__item" href="${item.original}">
-//     <img class="gallery__image" src="${item.preview}" 
-//     alt="${item.description}" />
-//   </a>`,
-//     ''
-//   );
+// const createImgEl = galleryItems.map(({ preview, original, description})  => 
+// `<a class="gallery__item" href="${original}">
+// <img class="gallery__image" src="${preview}" alt="${description}" />
+// </a>`).join('');
 
-  // and .MAP
-galleryItems.map(({ preview, original, description})  => 
+ // and .reduce
 
-`<a class="gallery__item" href="${original}">
-<img class="gallery__image" src="${preview}" alt="${description}" />
-</a>`).join('');
+const createImgEl = galleryItems.reduce(
+    (acc, item) =>
+      acc +
+      `<a class="gallery__item" href="${item.original}">
+    <img class="gallery__image" src="${item.preview}" 
+    alt="${item.description}" />
+  </a>`,
+    ''
+  );
 
 galleryId.insertAdjacentHTML("beforeend", createImgEl);
-
 
 // ============ Modal win
 

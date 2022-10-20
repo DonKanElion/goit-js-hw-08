@@ -509,20 +509,16 @@ var _simplelightboxDefault = parcelHelpers.interopDefault(_simplelightbox);
 var _simpleLightboxMinCss = require("simplelightbox/dist/simple-lightbox.min.css");
 var _galleryItems = require("./gallery-items");
 console.log((0, _galleryItems.galleryItems));
-const galleryId = document.querySelector("gallery");
-const createImgEl = // galleryItems.reduce(
-//     (acc, item) =>
-//       acc +
-//       `<a class="gallery__item" href="${item.original}">
-//     <img class="gallery__image" src="${item.preview}" 
-//     alt="${item.description}" />
-//   </a>`,
-//     ''
-//   );
-// and .MAP
-(0, _galleryItems.galleryItems).map(({ preview , original , description  })=>`<a class="gallery__item" href="${original}">
-<img class="gallery__image" src="${preview}" alt="${description}" />
-</a>`).join("");
+const galleryId = document.querySelector(".gallery");
+// const createImgEl = galleryItems.map(({ preview, original, description})  => 
+// `<a class="gallery__item" href="${original}">
+// <img class="gallery__image" src="${preview}" alt="${description}" />
+// </a>`).join('');
+// and .reduce
+const createImgEl = (0, _galleryItems.galleryItems).reduce((acc, item)=>acc + `<a class="gallery__item" href="${item.original}">
+    <img class="gallery__image" src="${item.preview}" 
+    alt="${item.description}" />
+  </a>`, "");
 galleryId.insertAdjacentHTML("beforeend", createImgEl);
 // ============ Modal win
 // var lightbox = 
