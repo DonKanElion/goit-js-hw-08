@@ -3,7 +3,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { galleryItems } from './gallery-items';
 
-console.log(galleryItems);
+// console.log(galleryItems);
 
 const galleryId = document.querySelector(".gallery");
 

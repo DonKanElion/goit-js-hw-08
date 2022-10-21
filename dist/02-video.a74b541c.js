@@ -504,10 +504,11 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"fFZ34":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _lodashThrottle = require("lodash.throttle");
-var _lodashThrottleDefault = parcelHelpers.interopDefault(_lodashThrottle);
 var _player = require("@vimeo/player");
 var _playerDefault = parcelHelpers.interopDefault(_player);
+var throttle = require("lodash.throttle");
+// import { throttle } from 'lodash';
+// import throttle from 'lodash.throttle';
 const iframe = document.querySelector("iframe");
 const player = new (0, _playerDefault.default)("vimeo-player");
 const LOCALSTORAGE_KEY = "videoplayer-current-time";
@@ -519,7 +520,7 @@ const LOCALSTORAGE_KEY = "videoplayer-current-time";
 //     const currentTime = localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
 //   };
 onPlay = (data)=>localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
-player.on("timeupdate", (0, _lodashThrottleDefault.default)(onPlay, 1000));
+player.on("timeupdate", throttle(onPlay, 1000));
 // player.getVideoTitle().then(function(title) {
 //     // console.log('title:', title);
 // });
