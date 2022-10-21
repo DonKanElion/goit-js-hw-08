@@ -14,8 +14,6 @@ const refs = {
 refs.form.addEventListener("input", throttle(onFormInput, 500));
 refs.form.addEventListener("submit", onFormSubmit);
 
-
-
 function onFormInput () {
     const formData = { 
         email: refs.input.value, 
