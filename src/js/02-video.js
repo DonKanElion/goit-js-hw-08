@@ -3,7 +3,7 @@ import throttle from 'lodash.throttle';
 // var throttle = require('lodash.throttle');
 // import { throttle } from 'lodash';
 
-const iframe = document.querySelector('iframe');
+// const iframe = document.querySelector('iframe');
 const player = new Player('vimeo-player');
 const LOCALSTORAGE_KEY = 'videoplayer-current-time';
 
@@ -17,7 +17,12 @@ const LOCALSTORAGE_KEY = 'videoplayer-current-time';
 //     const currentTime = localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
 //   };
 
-onPlay = data => localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+// onPlay = data => localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+
+function onPlay(data) {
+  localStorage.setItem(LOCALSTORAGE_KEY, data.seconds)
+};
+
 player.on('timeupdate', throttle(onPlay, 1000));
 
 // player.getVideoTitle().then(function(title) {

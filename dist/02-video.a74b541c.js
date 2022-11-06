@@ -510,7 +510,7 @@ var _lodashThrottle = require("lodash.throttle");
 var _lodashThrottleDefault = parcelHelpers.interopDefault(_lodashThrottle);
 // var throttle = require('lodash.throttle');
 // import { throttle } from 'lodash';
-const iframe = document.querySelector("iframe");
+// const iframe = document.querySelector('iframe');
 const player = new (0, _playerDefault.default)("vimeo-player");
 const LOCALSTORAGE_KEY = "videoplayer-current-time";
 // ====== Save time =====
@@ -520,7 +520,10 @@ const LOCALSTORAGE_KEY = "videoplayer-current-time";
 // const onPlay = function (data) {
 //     const currentTime = localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
 //   };
-onPlay = (data)=>localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+// onPlay = data => localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+function onPlay(data) {
+    localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+}
 player.on("timeupdate", (0, _lodashThrottleDefault.default)(onPlay, 1000));
 // player.getVideoTitle().then(function(title) {
 //     // console.log('title:', title);
